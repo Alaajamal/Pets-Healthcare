@@ -13,9 +13,9 @@ from erpnext.healthcare.doctype.healthcare_settings.healthcare_settings import g
 
 class Patient(Document):
 	def after_insert(self):
-		if(frappe.db.get_value("Pets Healthcare Settings", None, "manage_customer") == '1' and not self.customer):
+		if(frappe.db.get_value("Healthcare Settings", None, "manage_customer") == '1' and not self.customer):
 			create_customer(self)
-		if frappe.db.get_single_value('Pets Healthcare Settings', 'collect_registration_fee'):
+		if frappe.db.get_single_value('Healthcare Settings', 'collect_registration_fee'):
 			frappe.db.set_value('Patient', self.name, 'status', 'Disabled')
 		else:
 			send_registration_sms(self)
@@ -64,7 +64,7 @@ class Patient(Document):
 	def invoice_patient_registration(self):
 		frappe.db.set_value("Patient", self.name, "status", "Active")
 		send_registration_sms(self)
-		if(flt(frappe.get_value("Pets Healthcare Settings", None, "registration_fee"))>0):
+		if(flt(frappe.get_value("Healthcare Settings", None, "registration_fee"))>0):
 			company = frappe.defaults.get_user_default('company')
 			if not company:
 				company = frappe.db.get_value("Global Defaults", None, "default_company")
@@ -103,18 +103,18 @@ def make_invoice(patient, company):
 	item_line.uom = "Nos"
 	item_line.conversion_factor = 1
 	item_line.income_account = get_income_account(None, company)
-	item_line.rate = frappe.get_value("Pets Healthcare Settings", None, "registration_fee")
+	item_line.rate = frappe.get_value("Healthcare Settings", None, "registration_fee")
 	item_line.amount = item_line.rate
 	sales_invoice.set_missing_values()
 	return sales_invoice
 
 @frappe.whitelist()
-def get_patient_detail(patient):
-	patient_dict = frappe.db.sql("""select * from tabPatient where name=%s""", (patient), as_dict=1)
+def get_patient_detail(pet_owner):
+	patient_dict = frappe.db.sql("""select * from tabPatient where pet_owner=%s""", (pet_owner), as_dict=1)
 	if not patient_dict:
 		frappe.throw(_("Patient not found"))
-	vital_sign = frappe.db.sql("""select * from `tabVital Signs` where patient=%s
-		order by signs_date desc limit 1""", (patient), as_dict=1)
+	vital_sign = frappe.db.sql("""select * from `tabVital Signs` where pet_owner=%s
+		order by signs_date desc limit 1""", (pet_owner), as_dict=1)
 
 	details = patient_dict[0]
 	if vital_sign:

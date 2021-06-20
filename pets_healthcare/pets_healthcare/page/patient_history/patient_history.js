@@ -3,42 +3,42 @@ frappe.pages['patient_history'].on_page_load = function(wrapper) {
 	var me = this;
 	var page = frappe.ui.make_app_page({
 		parent: wrapper,
-		title: 'Patient History',
+		title: 'Pet Owner History',
 		single_column: true
 	});
 
-	frappe.breadcrumbs.add("Pets Healthcare");
+	frappe.breadcrumbs.add("Healthcare");
 	let pid = '';
 	page.main.html(frappe.render_template("patient_history", {}));
-	var patient = frappe.ui.form.make_control({
-		parent: page.main.find(".patient"),
+	var pet_owner = frappe.ui.form.make_control({
+		parent: page.main.find(".pet_owner"),
 		df: {
 			fieldtype: "Link",
-			options: "Patient",
-			fieldname: "patient",
+			options: "Pet Owner", //"Patient",
+			fieldname: "pet_owner",
 			change: function(){
-				if(pid != patient.get_value() && patient.get_value()){
+				if(pid != pet_owner.get_value() && pet_owner.get_value()){
 					me.start = 0;
 					me.page.main.find(".patient_documents_list").html("");
-					get_documents(patient.get_value(), me);
-					show_patient_info(patient.get_value(), me);
-					show_patient_vital_charts(patient.get_value(), me, "bp", "mmHg", "Blood Pressure");
+					get_documents(pet_owner.get_value(), me);
+					show_patient_info(pet_owner.get_value(), me);
+					show_patient_vital_charts(pet_owner.get_value(), me, "bp", "mmHg", "Blood Pressure");
 				}
-				pid = patient.get_value();
+				pid = pet_owner.get_value();
 			}
 		},
 		only_input: true,
 	});
-	patient.refresh();
+	pet_owner.refresh();
 
 	if (frappe.route_options){
-		patient.set_value(frappe.route_options.patient);
+		pet_owner.set_value(frappe.route_options.pet_owner);
 	}
 
 	this.page.main.on("click", ".btn-show-chart", function() {
 		var	btn_show_id = $(this).attr("data-show-chart-id"), pts = $(this).attr("data-pts");
 		var title = $(this).attr("data-title");
-		show_patient_vital_charts(patient.get_value(), me, btn_show_id, pts, title);
+		show_patient_vital_charts(pet_owner.get_value(), me, btn_show_id, pts, title);
 	});
 
 	this.page.main.on("click", ".btn-more", function() {
@@ -79,15 +79,15 @@ frappe.pages['patient_history'].on_page_load = function(wrapper) {
 	});
 	me.start = 0;
 	me.page.main.on("click", ".btn-get-records", function(){
-		get_documents(patient.get_value(), me);
+		get_documents(pet_owner.get_value(), me);
 	});
 };
 
-var get_documents = function(patient, me){
+var get_documents = function(pet_owner, me){
 	frappe.call({
-		"method": "erpnext.healthcare.page.patient_history.patient_history.get_feed",
+		"method": "pets_healthcare.pets_healthcare.page.patient_history.patient_history.get_feed",
 		args: {
-			name: patient,
+			name: pet_owner,
 			start: me.start,
 			page_length: 20
 		},
@@ -182,11 +182,11 @@ var add_date_separator = function(data) {
 	return data;
 };
 
-var show_patient_info = function(patient, me){
+var show_patient_info = function(pet_owner, me){
 	frappe.call({
-		"method": "erpnext.healthcare.doctype.patient.patient.get_patient_detail",
+		"method": "pets_healthcare.pets_healthcare.doctype.patient.patient.get_patient_detail",
 		args: {
-			patient: patient
+			pet_owner: pet_owner
 		},
 		callback: function (r) {
 			var data = r.message;

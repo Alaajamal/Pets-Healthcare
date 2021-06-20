@@ -1,5 +1,4 @@
 {
- "actions": [],
  "allow_copy": 1,
  "allow_import": 1,
  "allow_rename": 1,
@@ -23,9 +22,13 @@
   "image",
   "column_break_14",
   "status",
+  "pet_type",
   "customer",
   "report_preference",
   "mobile",
+  "owner_info_section",
+  "pet_owner",
+  "owner_name",
   "email",
   "phone",
   "sb_relation",
@@ -189,11 +192,13 @@
    "collapsible": 1,
    "fieldname": "sb_relation",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Patient Relation"
   },
   {
    "fieldname": "patient_relation",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Patient Relation",
    "options": "Patient Relation"
   },
@@ -236,6 +241,7 @@
    "collapsible": 1,
    "fieldname": "personal_and_social_history",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Personal and Social History"
   },
   {
@@ -259,6 +265,7 @@
    "collapsible": 1,
    "fieldname": "risk_factors",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Risk Factors"
   },
   {
@@ -331,13 +338,37 @@
    "label": "Default Currency",
    "options": "Currency",
    "print_hide": 1
+  },
+  {
+   "fieldname": "pet_type",
+   "fieldtype": "Link",
+   "label": "Pet Type",
+   "options": "Pet Type"
+  },
+  {
+   "fieldname": "owner_info_section",
+   "fieldtype": "Section Break",
+   "label": "Owner Info"
+  },
+  {
+   "fieldname": "pet_owner",
+   "fieldtype": "Link",
+   "label": "Pet Owner",
+   "options": "Pet Owner",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "per_owner.full_name",
+   "fieldname": "owner_name",
+   "fieldtype": "Data",
+   "label": "Owner Name",
+   "read_only": 1
   }
  ],
  "icon": "fa fa-user",
  "image_field": "image",
- "links": [],
  "max_attachments": 50,
- "modified": "2021-01-29 11:22:40.698125",
+ "modified": "2021-05-30 11:33:02.279878",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Patient",

@@ -11,13 +11,13 @@ from erpnext.healthcare.utils import render_docs_as_html
 def get_feed(name, start=0, page_length=20):
 	"""get feed"""
 	result = frappe.db.sql("""select name, owner, creation,
-		reference_doctype, reference_name, subject
+		reference_doctype, reference_name, subject, pet_owner 
 		from `tabPatient Medical Record`
-		where patient=%(patient)s
+		where pet_owner=%(pet_owner)s
 		order by creation desc
 		limit %(start)s, %(page_length)s""",
 		{
-			"patient": name,
+			"pet_owner": name,
 			"start": cint(start),
 			"page_length": cint(page_length)
 		}, as_dict=True)
@@ -27,7 +27,7 @@ def get_feed(name, start=0, page_length=20):
 def get_feed_for_dt(doctype, docname):
 	"""get feed"""
 	result = frappe.db.sql("""select name, owner, modified, creation,
-			reference_doctype, reference_name, subject
+			reference_doctype, reference_name, subject, pet_owner 
 		from `tabPatient Medical Record`
 		where reference_name=%(docname)s and reference_doctype=%(doctype)s
 		order by creation desc""",

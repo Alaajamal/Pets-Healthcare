@@ -126,4 +126,5 @@ app_license = "MIT"
 # override_doctype_dashboards = {
 # 	"Task": "pets_healthcare.task.get_dashboard_data"
 # }
+fixtures = ["Custom Script","Custom Field","Print Format","Property Setter","Workflow","Workflow State","Workflow Action Master", "Role"]
 
