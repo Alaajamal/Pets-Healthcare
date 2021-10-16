@@ -1,5 +1,4 @@
 {
- "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:template",
@@ -24,6 +23,8 @@
   "consumables",
   "consume_stock",
   "items",
+  "sb_test_prescription",
+  "lab_test_prescription",
   "sample_collection",
   "sample",
   "sample_uom",
@@ -79,8 +80,7 @@
    "depends_on": "is_billable",
    "fieldname": "rate",
    "fieldtype": "Float",
-   "label": "Rate",
-   "mandatory_depends_on": "is_billable"
+   "label": "Rate"
   },
   {
    "fieldname": "description",
@@ -167,10 +167,20 @@
    "no_copy": 1,
    "options": "Item",
    "read_only": 1
+  },
+  {
+   "fieldname": "sb_test_prescription",
+   "fieldtype": "Section Break",
+   "label": "Investigations"
+  },
+  {
+   "fieldname": "lab_test_prescription",
+   "fieldtype": "Table",
+   "label": "Investigations",
+   "options": "Lab Prescription"
   }
  ],
- "links": [],
- "modified": "2021-02-27 16:32:55.780893",
+ "modified": "2021-09-21 08:45:33.069844",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Clinical Procedure Template",

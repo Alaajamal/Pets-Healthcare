@@ -22,7 +22,8 @@ class Patient(Document):
 		self.reload()
 
 	def on_update(self):
-		self.add_as_website_user()
+		# ~ self.add_as_website_user()
+		pass
 
 	def add_as_website_user(self):
 		if(self.email):
@@ -93,10 +94,11 @@ def make_invoice(patient, company):
 	sales_invoice.customer = frappe.get_value("Patient", patient, "customer")
 	sales_invoice.due_date = getdate()
 	sales_invoice.company = company
-	sales_invoice.is_pos = '0'
+	sales_invoice.is_pos = '1'
 	sales_invoice.debit_to = get_receivable_account(company)
 
 	item_line = sales_invoice.append("items")
+	item_line.item_code = "Registeration Fee"
 	item_line.item_name = "Registeration Fee"
 	item_line.description = "Registeration Fee"
 	item_line.qty = 1

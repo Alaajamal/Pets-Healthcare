@@ -9,17 +9,17 @@ cur_frm.cscript.custom_refresh = function(doc) {
 
 frappe.ui.form.on('Lab Test', {
 	setup: function(frm) {
-		frm.get_field('normal_test_items').grid.editable_fields = [
-			{fieldname: 'lab_test_name', columns: 3},
-			{fieldname: 'lab_test_event', columns: 2},
-			{fieldname: 'result_value', columns: 2},
-			{fieldname: 'lab_test_uom', columns: 1},
-			{fieldname: 'normal_range', columns: 2}
-		];
-		frm.get_field('special_test_items').grid.editable_fields = [
-			{fieldname: 'lab_test_particulars', columns: 3},
-			{fieldname: 'result_value', columns: 7}
-		];
+		//~ frm.get_field('normal_test_items').grid.editable_fields = [
+			//~ {fieldname: 'lab_test_name', columns: 3},
+			//~ {fieldname: 'lab_test_event', columns: 2},
+			//~ {fieldname: 'result_value', columns: 2},
+			//~ {fieldname: 'lab_test_uom', columns: 1},
+			//~ {fieldname: 'normal_range', columns: 2}
+		//~ ];
+		//~ frm.get_field('special_test_items').grid.editable_fields = [
+			//~ {fieldname: 'lab_test_particulars', columns: 3},
+			//~ {fieldname: 'result_value', columns: 7}
+		//~ ];
 	},
 	refresh :  function(frm){
 		refresh_field('normal_test_items');

@@ -1,5 +1,4 @@
 {
- "actions": [],
  "beta": 1,
  "creation": "2017-05-09 11:26:22.337760",
  "doctype": "DocType",
@@ -14,6 +13,7 @@
   "collect_registration_fee",
   "registration_fee",
   "manage_appointment_invoice_automatically",
+  "manage_free_follow_ups_automatically",
   "max_visit",
   "valid_days",
   "healthcare_service_items",
@@ -88,7 +88,6 @@
    "fieldname": "registration_fee",
    "fieldtype": "Currency",
    "label": "Registration Fee",
-   "mandatory_depends_on": "eval:doc.collect_registration_fee == 1",
    "options": "Currency"
   },
   {
@@ -99,11 +98,13 @@
    "label": "Invoice Appointments Automatically"
   },
   {
+   "description": "The Number of free follow ups (Patient Encounter in Valid Days) allowed",
    "fieldname": "max_visit",
    "fieldtype": "Int",
    "label": "Patient Encounters in valid days"
   },
   {
+   "description": "Time Period (Valid Number of Days) For Free Consultation ",
    "fieldname": "valid_days",
    "fieldtype": "Int",
    "label": "Valid number of days"
@@ -292,11 +293,16 @@
    "fieldtype": "Small Text",
    "ignore_xss_filter": 1,
    "label": "Result Emailed"
+  },
+  {
+   "default": "0",
+   "fieldname": "manage_free_follow_ups_automatically",
+   "fieldtype": "Check",
+   "label": "Enable Free Follow_ups"
   }
  ],
  "issingle": 1,
- "links": [],
- "modified": "2021-01-23 13:39:06.078738",
+ "modified": "2021-10-03 11:27:00.642487",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Healthcare Settings",

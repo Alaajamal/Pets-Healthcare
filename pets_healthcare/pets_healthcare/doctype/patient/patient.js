@@ -10,6 +10,15 @@ frappe.ui.form.on('Patient', {
 				]
 			};
 		});
+
+		frm.set_query("pet_type", function() {
+			return {
+				filters: {
+					"is_group": 0
+				}
+			};
+		});
+
 		if (frappe.defaults.get_default("patient_master_name") != "Naming Series") {
 			frm.toggle_display("naming_series", false);
 		} else {
@@ -65,6 +74,18 @@ frappe.ui.form.on("Patient", "dob", function(frm) {
 		$(frm.fields_dict['age_html'].wrapper).html("");
 	}
 });
+
+frappe.ui.form.on("Patient", "age_in_months", function(frm) {
+	if(frm.doc.age_in_months) {
+		var d = new Date();
+		d.setMonth(d.getMonth() - frm.doc.age_in_months);
+		$(frm.fields_dict['age_html'].wrapper).html("DOB : " + d.toLocaleDateString('en-US', {year: "numeric", month: "long", day:"numeric"}));
+	}
+	else {
+		$(frm.fields_dict['age_html'].wrapper).html("");
+	}
+});
+
 
 var create_medical_record = function (frm) {
 	frappe.route_options = {

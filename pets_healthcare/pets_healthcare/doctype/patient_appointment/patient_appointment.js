@@ -9,6 +9,16 @@ frappe.ui.form.on('Patient Appointment', {
 		};
 	},
 	refresh: function(frm) {
+
+		frm.set_query("pet_type", function() {
+			return {
+				filters: {
+					"is_group": 0
+				}
+			};
+		});
+
+
 		frm.set_query("patient", function () {
 			return {
 				filters: {"status": "Active"}
@@ -34,6 +44,16 @@ frappe.ui.form.on('Patient Appointment', {
 				frappe.route_options = {"patient": frm.doc.patient};
 				frappe.set_route("patient_history");
 			},__("View"));
+
+			if(!frm.doc.__islocal){
+				frm.add_custom_button(__('Create Sales Invoice'), function() {
+					frappe.route_options = {'patient': frm.doc.patient, 'pet_type': frm.doc.pet_type,
+					 'pet_owner': frm.doc.pet_owner, 'ref_practitioner': frm.doc.practitioner};
+					frappe.set_route('Form', 'Sales Invoice', 'New Sales Invoice 1');
+				},'Create');
+			}
+			
+		
 		}
 		if(frm.doc.status == "Open"){
 			frm.add_custom_button(__('Cancel'), function() {
@@ -88,7 +108,7 @@ frappe.ui.form.on('Patient Appointment', {
 			});
 		}
 		frm.set_df_property("get_procedure_from_encounter", "read_only", frm.doc.__islocal ? 0 : 1);
-		frappe.db.get_value('Pets Healthcare Settings', {name: 'Pets Healthcare Settings'}, 'manage_appointment_invoice_automatically', (r) => {
+		frappe.db.get_value('Healthcare Settings', {name: 'Healthcare Settings'}, 'manage_appointment_invoice_automatically', (r) => {
 			if(r.manage_appointment_invoice_automatically == 1){
 				frm.set_df_property("mode_of_payment", "hidden", 0);
 				frm.set_df_property("paid_amount", "hidden", 0);

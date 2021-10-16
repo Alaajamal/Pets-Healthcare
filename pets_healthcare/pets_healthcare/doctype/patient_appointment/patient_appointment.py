@@ -19,10 +19,12 @@ class PatientAppointment(Document):
 		today = datetime.date.today()
 		appointment_date = getdate(self.appointment_date)
 
-		# If appointment created for today set as open
+		# If appointment created for today set as open else scheduled
 		if today == appointment_date:
 			frappe.db.set_value("Patient Appointment", self.name, "status", "Open")
-			self.reload()
+		elif appointment_date > today:
+			frappe.db.set_value("Patient Appointment", self.name, "status", "Scheduled")
+		self.reload()
 
 	def validate(self):
 		self.set_appointment_datetime()

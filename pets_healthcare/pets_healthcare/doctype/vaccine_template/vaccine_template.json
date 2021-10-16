@@ -1,0 +1,81 @@
+{
+ "autoname": "field:title",
+ "creation": "2021-08-15 15:48:32.786407",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "pet_type",
+  "description",
+  "section_break_3",
+  "vaccines_schadules"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Template name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "pet_type",
+   "fieldtype": "Link",
+   "label": "Pet Type",
+   "options": "Pet Type"
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "vaccines_schadules",
+   "fieldtype": "Table",
+   "label": "Vaccines Schadules",
+   "options": "Vaccines Schedules"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description "
+  }
+ ],
+ "modified": "2021-09-21 09:51:22.965888",
+ "modified_by": "Administrator",
+ "module": "Pets Healthcare",
+ "name": "Vaccine Template",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Healthcare  Practitioner",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "restrict_to_domain": "Healthcare",
+ "search_fields": "title,pet_type",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

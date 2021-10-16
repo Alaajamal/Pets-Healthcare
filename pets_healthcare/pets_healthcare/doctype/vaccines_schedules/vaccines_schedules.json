@@ -1,0 +1,44 @@
+{
+ "creation": "2021-08-15 15:50:19.508744",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "uom",
+  "vac_date_after_start"
+ ],
+ "fields": [
+  {
+   "fetch_from": "item_code.stock_uom",
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "UOM",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "vac_date_after_start",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "# of Days "
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item",
+   "options": "Item"
+  }
+ ],
+ "istable": 1,
+ "modified": "2021-08-17 10:17:23.918418",
+ "modified_by": "Administrator",
+ "module": "Pets Healthcare",
+ "name": "Vaccines Schedules",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

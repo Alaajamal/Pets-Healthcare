@@ -1,0 +1,105 @@
+{
+ "autoname": "PET-VAC-.#####",
+ "creation": "2021-08-15 16:03:33.464943",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "patient",
+  "pet_owner",
+  "date",
+  "section_break_4",
+  "vaccine_template",
+  "pet_vaccine_schedule"
+ ],
+ "fields": [
+  {
+   "fetch_from": "patient.patient_name",
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Patient",
+   "options": "Patient",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "patient.pet_owner",
+   "fieldname": "pet_owner",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Pet Owner",
+   "options": "Pet Owner"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "options": "Date"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "vaccine_template",
+   "fieldtype": "Link",
+   "label": "Vaccine Template",
+   "options": "Vaccine Template"
+  },
+  {
+   "fieldname": "pet_vaccine_schedule",
+   "fieldtype": "Table",
+   "label": "Pet Vaccine Schedule",
+   "options": "Pet Vaccine Schedule"
+  }
+ ],
+ "modified": "2021-08-17 10:47:28.870949",
+ "modified_by": "Administrator",
+ "module": "Pets Healthcare",
+ "name": "Pet Vaccination",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Pets Healthcare Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Healthcare  Practitioner",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "restrict_to_domain": "Healthcare",
+ "search_fields": "patient,pet_owner,date,vaccine_template",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

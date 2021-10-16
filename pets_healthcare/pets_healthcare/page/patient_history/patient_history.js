@@ -9,6 +9,7 @@ frappe.pages['patient_history'].on_page_load = function(wrapper) {
 
 	frappe.breadcrumbs.add("Healthcare");
 	let pid = '';
+	let paid = ''
 	page.main.html(frappe.render_template("patient_history", {}));
 	var pet_owner = frappe.ui.form.make_control({
 		parent: page.main.find(".pet_owner"),
@@ -23,6 +24,35 @@ frappe.pages['patient_history'].on_page_load = function(wrapper) {
 					get_documents(pet_owner.get_value(), me);
 					show_patient_info(pet_owner.get_value(), me);
 					show_patient_vital_charts(pet_owner.get_value(), me, "bp", "mmHg", "Blood Pressure");
+
+					var patient = frappe.ui.form.make_control({
+					parent: page.main.find(".patient"),
+					df: {
+						fieldtype: "Link",
+						options: "Patient", //"Patient",
+						fieldname: "patient",
+						change: function(){
+							if(paid != patient.get_value() && patient.get_value()){
+								me.start = 0;
+								me.page.main.find(".patient_documents_list").html("");
+								get_documents(pet_owner.get_value(), me, patient.get_value());
+								show_patient_info(pet_owner.get_value(), me, patient.get_value());
+								// show_patient_vital_charts(patient.get_value(), me, "bp", "mmHg", "Blood Pressure");
+							}
+							paid = patient.get_value();
+						},
+						get_query: function() {
+							return {
+								filters: {
+									pet_owner: pet_owner.get_value(),
+									
+								}
+							}
+						}
+					},
+					only_input: true,
+				});
+				patient.refresh();
 				}
 				pid = pet_owner.get_value();
 			}
@@ -30,6 +60,7 @@ frappe.pages['patient_history'].on_page_load = function(wrapper) {
 		only_input: true,
 	});
 	pet_owner.refresh();
+
 
 	if (frappe.route_options){
 		pet_owner.set_value(frappe.route_options.pet_owner);
@@ -50,7 +81,7 @@ frappe.pages['patient_history'].on_page_load = function(wrapper) {
 			if(doctype && docname){
 				let exclude = ["patient", "patient_name", 'patient_sex', "encounter_date"];
 				frappe.call({
-					method: "erpnext.healthcare.utils.render_doc_as_html",
+					method: "pets_healthcare.pets_healthcare.utils.render_doc_as_html",
 					args:{
 						doctype: doctype,
 						docname: docname,
@@ -83,11 +114,12 @@ frappe.pages['patient_history'].on_page_load = function(wrapper) {
 	});
 };
 
-var get_documents = function(pet_owner, me){
+var get_documents = function(pet_owner, me, patient){
 	frappe.call({
 		"method": "pets_healthcare.pets_healthcare.page.patient_history.patient_history.get_feed",
 		args: {
 			name: pet_owner,
+			patient: patient,
 			start: me.start,
 			page_length: 20
 		},
@@ -95,6 +127,7 @@ var get_documents = function(pet_owner, me){
 			var data = r.message;
 			if(data.length){
 				add_to_records(me, data);
+				console.log(data)
 			}else{
 				me.page.main.find(".patient_documents_list").append("<div class='text-muted' align='center'><br><br>No more records..<br><br></div>");
 				me.page.main.find(".btn-get-records").hide();
@@ -120,7 +153,16 @@ var add_to_records = function(me, data){
 				data[i].imgsrc = false;
 			}
 			var time_line_heading = data[i].practitioner ? `${data[i].practitioner} ` : ``;
-			time_line_heading += data[i].reference_doctype + " - "+ data[i].reference_name;
+			time_line_heading += data[i].reference_doctype + " - "+ `<a class='grey' href='#Form/${data[i].reference_doctype}/${data[i].reference_name}' 
+			data-doctype = '${data[i].reference_doctype}' data-name = '${data[i].reference_name}' onclick='return true'>${data[i].reference_name}</a>`
+
+			if(data[i].attach){
+				var attach = data[i].attach;
+			}
+			else{
+				var attach = '';
+			}
+
 			details += `<li data-toggle='pill' class='patient_doc_menu'
 			data-doctype='${data[i].reference_doctype}' data-docname='${data[i].reference_name}'>
 			<div class='col-sm-12 d-flex border-bottom py-3'>`;
@@ -148,6 +190,11 @@ var add_to_records = function(me, data){
 								</a>
 							</div>
 						</span>
+						<div>
+							
+							<img src="${attach}" width="300" />
+							
+						</div>
 						<span class='document-html' hidden  data-fetched="0">
 						</span>
 					</div>
@@ -221,7 +268,7 @@ var show_patient_info = function(pet_owner, me){
 
 var show_patient_vital_charts = function(patient, me, btn_show_id, pts, title) {
 	frappe.call({
-		method: "erpnext.healthcare.utils.get_patient_vitals",
+		method: "pets_healthcare.pets_healthcare.utils.get_patient_vitals",
 		args:{
 			patient: patient
 		},

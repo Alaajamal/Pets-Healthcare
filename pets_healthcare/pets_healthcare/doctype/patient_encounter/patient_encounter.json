@@ -1,5 +1,4 @@
 {
- "allow_copy": 1,
  "allow_import": 1,
  "autoname": "naming_series:",
  "beta": 1,
@@ -25,6 +24,8 @@
   "visit_department",
   "encounter_date",
   "encounter_time",
+  "posting_date",
+  "posting_time",
   "invoiced",
   "sb_symptoms",
   "symptoms_select",
@@ -38,6 +39,7 @@
   "codification_table",
   "sb_drug_prescription",
   "drug_prescription",
+  "items",
   "sb_test_prescription",
   "lab_test_prescription",
   "sb_procedures",
@@ -165,12 +167,12 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "default": "0",
    "fieldname": "invoiced",
    "fieldtype": "Check",
    "label": "Invoiced",
-   "no_copy": 1,
-   "read_only": 1
+   "no_copy": 1
   },
   {
    "collapsible": 1,
@@ -301,10 +303,27 @@
    "label": "Pet Owner",
    "options": "Pet Owner",
    "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Consumables",
+   "options": "Patient Encounter Item"
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "posting_time",
+   "fieldtype": "Time",
+   "label": "Posting Time"
   }
  ],
  "is_submittable": 1,
- "modified": "2021-06-14 14:00:40.833835",
+ "modified": "2021-08-15 16:44:46.324577",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Patient Encounter",

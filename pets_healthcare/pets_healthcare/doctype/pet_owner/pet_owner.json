@@ -1,5 +1,5 @@
 {
- "autoname": "series:OWN-.#####",
+ "autoname": "OWN-.#####",
  "creation": "2021-04-24 14:36:31.221279",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -13,16 +13,11 @@
  ],
  "fields": [
   {
+   "fetch_from": "pet_owner.full_name",
    "fieldname": "full_name",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Full Name",
-   "reqd": 1
-  },
-  {
-   "fieldname": "email",
-   "fieldtype": "Data",
-   "label": "Email",
    "reqd": 1
   },
   {
@@ -44,9 +39,14 @@
    "fieldtype": "Data",
    "label": "Customer Name",
    "read_only": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
   }
  ],
- "modified": "2021-05-30 14:10:54.811207",
+ "modified": "2021-09-20 10:42:34.183791",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Pet Owner",
@@ -103,7 +103,10 @@
  ],
  "quick_entry": 1,
  "restrict_to_domain": "Healthcare",
+ "search_fields": "full_name,email,phone",
+ "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
+ "title_field": "full_name",
  "track_changes": 1
 }

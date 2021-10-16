@@ -12,6 +12,7 @@ class LabTest(Document):
 	def on_submit(self):
 		frappe.db.set_value(self.doctype,self.name,"submitted_date", getdate())
 		insert_lab_test_to_medical_record(self)
+		self.validate_normal_test_results()
 		frappe.db.set_value("Lab Test", self.name, "status", "Completed")
 
 	def on_cancel(self):
@@ -39,6 +40,16 @@ class LabTest(Document):
 		lab_test = self
 		create_test_from_template(lab_test)
 		self.reload()
+	
+	def validate_normal_test_results(self):
+		pass
+		# ~ for t  in self.get("normal_test_items"):
+			# ~ if not t.result_value :
+				# ~ frappe.throw("Please add resulte for row : "+str(t.idx))
+				
+			
+		
+		
 
 def create_test_from_template(lab_test):
 	template = frappe.get_doc("Lab Test Template", lab_test.template)
@@ -163,7 +174,7 @@ def create_normals(template, lab_test):
 	normal.lab_test_name = template.lab_test_name
 	normal.lab_test_uom = template.lab_test_uom
 	normal.normal_range = template.lab_test_normal_range
-	normal.require_result_value = 1
+	#normal.require_result_value = 1
 	normal.template = template.name
 
 def create_compounds(template, lab_test, is_group):
@@ -177,7 +188,7 @@ def create_compounds(template, lab_test, is_group):
 
 		normal.lab_test_uom = normal_test_template.lab_test_uom
 		normal.normal_range = normal_test_template.normal_range
-		normal.require_result_value = 1
+		#normal.require_result_value = 1
 		normal.template = template.name
 
 def create_specials(template, lab_test):
@@ -264,7 +275,7 @@ def load_result_format(lab_test, template, prescription, invoice):
 				normal.lab_test_name = lab_test_group.group_event
 				normal.lab_test_uom = lab_test_group.group_test_uom
 				normal.normal_range = lab_test_group.group_test_normal_range
-				normal.require_result_value = 1
+				#normal.require_result_value = 1
 				normal.template = template.name
 	if(template.lab_test_template_type != 'No Result'):
 		if(prescription):

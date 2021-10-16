@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "pet_type_name",
+  "registration_fee",
   "lft",
   "rgt",
   "is_group",
@@ -55,10 +56,17 @@
    "reqd": 1,
    "translatable": 1,
    "unique": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "registration_fee",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Registration Fee"
   }
  ],
  "is_tree": 1,
- "modified": "2021-04-24 14:48:02.125244",
+ "modified": "2021-07-01 11:46:58.423272",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Pet Type",

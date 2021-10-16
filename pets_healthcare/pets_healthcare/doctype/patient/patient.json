@@ -18,6 +18,7 @@
   "sex",
   "blood_group",
   "dob",
+  "age_in_months",
   "age_html",
   "image",
   "column_break_14",
@@ -29,7 +30,6 @@
   "owner_info_section",
   "pet_owner",
   "owner_name",
-  "email",
   "phone",
   "sb_relation",
   "patient_relation",
@@ -152,6 +152,8 @@
    "fieldtype": "Column Break"
   },
   {
+   "fetch_from": "pet_owner.customer",
+   "fetch_if_empty": 1,
    "fieldname": "customer",
    "fieldtype": "Link",
    "ignore_user_permissions": 1,
@@ -164,23 +166,6 @@
    "fieldtype": "Select",
    "label": "Report Preference",
    "options": "\nEmail\nPrint"
-  },
-  {
-   "bold": 1,
-   "fieldname": "mobile",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Mobile"
-  },
-  {
-   "bold": 1,
-   "fieldname": "email",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Email",
-   "options": "Email"
   },
   {
    "fieldname": "phone",
@@ -340,10 +325,13 @@
    "print_hide": 1
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "pet_type",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Pet Type",
-   "options": "Pet Type"
+   "options": "Pet Type",
+   "reqd": 1
   },
   {
    "fieldname": "owner_info_section",
@@ -351,6 +339,7 @@
    "label": "Owner Info"
   },
   {
+   "fetch_from": "pet_owner.full_name",
    "fieldname": "pet_owner",
    "fieldtype": "Link",
    "label": "Pet Owner",
@@ -358,17 +347,27 @@
    "reqd": 1
   },
   {
-   "fetch_from": "per_owner.full_name",
+   "fetch_from": "pet_owner.full_name",
    "fieldname": "owner_name",
    "fieldtype": "Data",
-   "label": "Owner Name",
-   "read_only": 1
+   "label": "Owner Name"
+  },
+  {
+   "fetch_from": "pet_owner.phone",
+   "fieldname": "mobile",
+   "fieldtype": "Data",
+   "label": "Mobile"
+  },
+  {
+   "fieldname": "age_in_months",
+   "fieldtype": "Int",
+   "label": "Age In Months"
   }
  ],
  "icon": "fa fa-user",
  "image_field": "image",
  "max_attachments": 50,
- "modified": "2021-05-30 11:33:02.279878",
+ "modified": "2021-09-20 10:25:53.382534",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Patient",
@@ -426,7 +425,7 @@
  ],
  "quick_entry": 1,
  "restrict_to_domain": "Healthcare",
- "search_fields": "patient_name,mobile,email,phone",
+ "search_fields": "patient_name,phone",
  "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "ASC",
