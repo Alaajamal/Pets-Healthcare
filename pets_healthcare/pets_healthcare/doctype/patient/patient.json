@@ -339,7 +339,6 @@
    "label": "Owner Info"
   },
   {
-   "fetch_from": "pet_owner.full_name",
    "fieldname": "pet_owner",
    "fieldtype": "Link",
    "label": "Pet Owner",
@@ -367,7 +366,7 @@
  "icon": "fa fa-user",
  "image_field": "image",
  "max_attachments": 50,
- "modified": "2021-09-20 10:25:53.382534",
+ "modified": "2021-10-30 10:02:41.606756",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Patient",
@@ -421,6 +420,15 @@
    "role": "Nursing User",
    "share": 1,
    "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Pets Healthcare Casher",
+   "share": 1
   }
  ],
  "quick_entry": 1,

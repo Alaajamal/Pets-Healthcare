@@ -323,7 +323,7 @@
   }
  ],
  "is_submittable": 1,
- "modified": "2021-08-15 16:44:46.324577",
+ "modified": "2021-10-20 12:27:30.947296",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Patient Encounter",
@@ -343,6 +343,15 @@
    "share": 1,
    "submit": 1,
    "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Casher",
+   "share": 1
   }
  ],
  "restrict_to_domain": "Healthcare",

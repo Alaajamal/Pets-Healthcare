@@ -201,12 +201,8 @@
    "fieldname": "sample",
    "fieldtype": "Link",
    "ignore_user_permissions": 1,
-   "in_filter": 1,
    "label": "Sample ID",
-   "options": "Sample Collection",
-   "print_hide": 1,
-   "read_only": 1,
-   "report_hide": 1
+   "options": "Sample Collection"
   },
   {
    "fieldname": "result_date",
@@ -308,6 +304,7 @@
   {
    "fieldname": "normal_test_items",
    "fieldtype": "Table",
+   "label": "Normal Test Result",
    "options": "Normal Test Items"
   },
   {
@@ -323,11 +320,13 @@
   },
   {
    "fieldname": "sb_sensitivity",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Sensitivity Test Result"
   },
   {
    "fieldname": "sensitivity_test_items",
    "fieldtype": "Table",
+   "label": "Sensitivity Test Result",
    "options": "Sensitivity Test Items",
    "print_hide": 1,
    "report_hide": 1
@@ -425,7 +424,7 @@
   }
  ],
  "is_submittable": 1,
- "modified": "2021-09-28 09:12:36.567928",
+ "modified": "2021-12-09 09:58:50.058893",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Lab Test",
@@ -474,6 +473,5 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "title_field": "patient",
- "track_changes": 1,
  "track_seen": 1
 }

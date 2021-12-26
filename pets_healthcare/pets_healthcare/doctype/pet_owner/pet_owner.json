@@ -1,5 +1,5 @@
 {
- "autoname": "OWN-.#####",
+ "autoname": "OWN-.00001",
  "creation": "2021-04-24 14:36:31.221279",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -46,7 +46,7 @@
    "label": "Email"
   }
  ],
- "modified": "2021-09-20 10:42:34.183791",
+ "modified": "2021-10-28 15:41:26.655325",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Pet Owner",
@@ -97,6 +97,27 @@
    "read": 1,
    "report": 1,
    "role": "Nursing User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Pets Healthcare Casher",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Healthcare  Practitioner",
    "share": 1,
    "write": 1
   }

@@ -152,6 +152,7 @@
    "set_only_once": 1
   },
   {
+   "default": "\u0642\u0633\u0645 \u0627\u0644\u0631\u0639\u0627\u064a\u0629 \u0627\u0644\u0635\u062d\u064a\u0629",
    "fieldname": "department",
    "fieldtype": "Link",
    "ignore_user_permissions": 1,
@@ -167,6 +168,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "Today",
    "fieldname": "appointment_date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -325,7 +327,7 @@
    "options": "Pet Type"
   }
  ],
- "modified": "2021-10-03 10:10:10.790401",
+ "modified": "2021-12-09 14:24:14.234278",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Patient Appointment",

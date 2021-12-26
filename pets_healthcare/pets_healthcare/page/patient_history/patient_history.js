@@ -37,7 +37,7 @@ frappe.pages['patient_history'].on_page_load = function(wrapper) {
 								me.page.main.find(".patient_documents_list").html("");
 								get_documents(pet_owner.get_value(), me, patient.get_value());
 								show_patient_info(pet_owner.get_value(), me, patient.get_value());
-								// show_patient_vital_charts(patient.get_value(), me, "bp", "mmHg", "Blood Pressure");
+								//show_patient_vital_charts(pet_owner.get_value(), me, "bp", "mmHg", "Blood Pressure");
 							}
 							paid = patient.get_value();
 						},

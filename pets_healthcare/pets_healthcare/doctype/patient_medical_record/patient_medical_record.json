@@ -1,5 +1,4 @@
 {
- "allow_copy": 1,
  "allow_import": 1,
  "autoname": "naming_series:",
  "beta": 1,
@@ -124,7 +123,7 @@
   }
  ],
  "in_create": 1,
- "modified": "2021-06-14 14:03:14.815369",
+ "modified": "2021-12-12 12:53:40.371830",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Patient Medical Record",
