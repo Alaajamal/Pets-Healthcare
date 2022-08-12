@@ -1,5 +1,5 @@
 {
- "autoname": "OWN-.00001",
+ "autoname": "field:full_name",
  "creation": "2021-04-24 14:36:31.221279",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -18,7 +18,8 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Full Name",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "phone",
@@ -46,7 +47,7 @@
    "label": "Email"
   }
  ],
- "modified": "2021-10-28 15:41:26.655325",
+ "modified": "2022-02-07 09:48:01.393865",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Pet Owner",

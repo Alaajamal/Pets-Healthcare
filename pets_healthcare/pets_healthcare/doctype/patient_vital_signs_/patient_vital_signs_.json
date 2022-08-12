@@ -1,0 +1,120 @@
+{
+ "allow_copy": 1,
+ "beta": 1,
+ "creation": "2022-07-25 08:27:31.981112",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "temperature",
+  "pulse",
+  "respiratory_rate",
+  "tongue",
+  "abdomen",
+  "column_break_8",
+  "reflexes",
+  "bp_systolic",
+  "bp_diastolic",
+  "bp",
+  "height",
+  "weight"
+ ],
+ "fields": [
+  {
+   "description": "Presence of a fever (temp &gt; 38.5 \u00b0C/101.3 \u00b0F or sustained temp &gt; 38 \u00b0C/100.4 \u00b0F)",
+   "fieldname": "temperature",
+   "fieldtype": "Data",
+   "ignore_xss_filter": 1,
+   "in_list_view": 1,
+   "label": "Body Temperature"
+  },
+  {
+   "description": "Adults' pulse rate is anywhere between 50 and 80 beats per minute.",
+   "fieldname": "pulse",
+   "fieldtype": "Data",
+   "ignore_xss_filter": 1,
+   "in_list_view": 1,
+   "label": "Heart Rate / Pulse"
+  },
+  {
+   "description": "Normal reference range for an adult is 16\u201320 breaths/minute (RCP 2012)",
+   "fieldname": "respiratory_rate",
+   "fieldtype": "Data",
+   "ignore_xss_filter": 1,
+   "in_list_view": 1,
+   "label": "Respiratory rate"
+  },
+  {
+   "fieldname": "tongue",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tongue",
+   "options": "\nCoated\nVery Coated\nNormal\nFurry\nCuts"
+  },
+  {
+   "fieldname": "abdomen",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Abdomen",
+   "options": "\nNormal\nBloated\nFull\nFluid\nConstipated"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reflexes",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Reflexes",
+   "options": "\nNormal\nHyper\nVery Hyper\nOne Sided"
+  },
+  {
+   "fieldname": "bp_systolic",
+   "fieldtype": "Data",
+   "ignore_xss_filter": 1,
+   "in_list_view": 1,
+   "label": "Blood Pressure (systolic)"
+  },
+  {
+   "fieldname": "bp_diastolic",
+   "fieldtype": "Data",
+   "ignore_xss_filter": 1,
+   "in_list_view": 1,
+   "label": "Blood Pressure (diastolic)"
+  },
+  {
+   "description": "Normal resting blood pressure in an adult is approximately 120 mmHg systolic, and 80 mmHg diastolic, abbreviated \"120/80 mmHg\"",
+   "fieldname": "bp",
+   "fieldtype": "Data",
+   "label": "Blood Pressure",
+   "read_only": 1
+  },
+  {
+   "fieldname": "height",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Height (In Meter)"
+  },
+  {
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Weight (In Kilogram)"
+  }
+ ],
+ "is_submittable": 1,
+ "istable": 1,
+ "modified": "2022-07-25 08:28:36.960451",
+ "modified_by": "Administrator",
+ "module": "Pets Healthcare",
+ "name": "Patient Vital Signs ",
+ "owner": "Administrator",
+ "permissions": [],
+ "restrict_to_domain": "Healthcare",
+ "show_name_in_global_search": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "track_seen": 1
+}

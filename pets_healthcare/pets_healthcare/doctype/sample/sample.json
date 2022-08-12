@@ -1,0 +1,63 @@
+{
+ "creation": "2022-07-24 15:32:14.840569",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sample",
+  "sample_uom",
+  "sample_quantity",
+  "collected_by",
+  "reference_name1"
+ ],
+ "fields": [
+  {
+   "fieldname": "sample",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Sample",
+   "options": "Lab Test Sample"
+  },
+  {
+   "default": "Unit",
+   "fieldname": "sample_uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "UOM",
+   "options": "UOM"
+  },
+  {
+   "default": "1",
+   "fieldname": "sample_quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "collected_by",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Collected by",
+   "options": "Healthcare Practitioner"
+  },
+  {
+   "fieldname": "reference_name1",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Reference Name",
+   "options": "Sample Collection",
+   "read_only": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2022-07-28 15:46:09.010566",
+ "modified_by": "Administrator",
+ "module": "Pets Healthcare",
+ "name": "Sample",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

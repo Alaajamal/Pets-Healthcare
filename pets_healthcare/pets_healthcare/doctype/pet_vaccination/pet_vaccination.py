@@ -6,6 +6,8 @@ from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
 from frappe.utils import add_to_date, now
+from frappe.model.mapper import get_mapped_doc
+from frappe.utils import flt, get_link_to_form, get_time, getdate
 
 class PetVaccination(Document):
 	def get_vac_items(self,vac_template =None):
@@ -20,7 +22,16 @@ class PetVaccination(Document):
 				child.item = vs_doc.item_code
 				child.idx = data[i].idx
 				child.uom = vs_doc.uom
+				child.qty = vs_doc.qty
 				child.state = "Not Taken"
 				child.date = add_to_date(self.date, days=vs_doc.vac_date_after_start)
 					
 		return data 
+		
+		
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+{
+ "creation": "2022-06-19 12:02:31.818682",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "diagnosis"
+ ],
+ "fields": [
+  {
+   "fieldname": "diagnosis",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Diagnosis",
+   "options": "Diagnosis"
+  }
+ ],
+ "istable": 1,
+ "modified": "2022-06-19 12:02:39.229186",
+ "modified_by": "Administrator",
+ "module": "Pets Healthcare",
+ "name": "Patient Encounter Diagnosis",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

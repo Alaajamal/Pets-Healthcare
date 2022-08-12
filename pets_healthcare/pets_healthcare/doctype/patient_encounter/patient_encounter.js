@@ -83,16 +83,23 @@ frappe.ui.form.on('Patient Encounter', {
 				frappe.msgprint(__("Please select Patient"));
 			}
 		},"View");
-		frm.add_custom_button(__('Vital Signs'), function() {
-			btn_create_vital_signs(frm);
-		},"Create");
-		frm.add_custom_button(__('Medical Record'), function() {
-			create_medical_record(frm);
-		},"Create");
+		
+		frm.add_custom_button(__("Sales Invoice"), function() {
+			frappe.route_options = {'patient': frm.doc.patient, 'pet_owner': frm.doc.pet_owner, 
+				'ref_practitioner': frm.doc.practitioner};
+			frappe.set_route('Form', 'Sales Invoice', 'New Sales Invoice 1');
+		}, "Create");
+		
+		//~ frm.add_custom_button(__('Vital Signs'), function() {
+			//~ btn_create_vital_signs(frm);
+		//~ },"Create");
+		//~ frm.add_custom_button(__('Medical Record'), function() {
+			//~ create_medical_record(frm);
+		//~ },"Create");
 
-		frm.add_custom_button(__("Procedure"),function(){
-			btn_create_procedure(frm);
-		},"Create");
+		//~ frm.add_custom_button(__("Procedure"),function(){
+			//~ btn_create_procedure(frm);
+		//~ },"Create");
 
 		frm.set_query("patient", function () {
 			return {
@@ -102,14 +109,33 @@ frappe.ui.form.on('Patient Encounter', {
 		frm.set_query("drug_code", "drug_prescription", function() {
 			return {
 				filters: {
-					is_stock_item:'1'
+					//~ is_stock_item:'1'
+					item_group : "ادوية وعلاجات"
+
 				}
 			};
 		});
+		frm.set_query("procedure", "procedure_prescription", function () {
+			return {
+				filters : {
+					item_group: "Procedure"
+				}
+			};
+		});
+		
+		frm.set_query("item", "patient_vaccination", function () {
+			return {
+				filters : {
+					item_group : "ادوية وعلاجات"
+				}
+			};
+		});
+		
 		frm.set_query("lab_test_code", "lab_test_prescription", function() {
 			return {
 				filters: {
-					is_billable:'1'
+					//~ is_billable:'1'
+					lab_test_group: "Laboratory"
 				}
 			};
 		});
@@ -124,7 +150,8 @@ frappe.ui.form.on('Patient Encounter', {
 			return {
 				filters: {
 					//	Scheduled filter for demo ...
-					status:['in',["Open","Scheduled"]]
+					//~ status:['in',["Open","Scheduled"]]
+					status: ['in',["Open"]]
 				}
 			};
 		});
@@ -324,6 +351,28 @@ frappe.ui.form.on("Patient Encounter", "practitioner", function(frm) {
 		});
 	}
 });
+
+
+//vaccine
+//~ frappe.ui.form.on('Patient Encounter', {
+	//~ refresh: function(frm) {
+
+	//~ },
+	//~ vaccine_template: function(frm) {
+		//~ console.log(frm.doc.vaccine_template);
+		//~ frappe.call({
+            //~ method: "get_vac_items", 
+            //~ doc:frm.doc,
+            //~ args:{"vac_template":frm.doc.vaccine_template},
+            //~ callback: function(r) {
+				//~ console.log(r)
+                //~ cur_frm.refresh()
+            //~ }
+        //~ });
+	//~ }
+//~ });
+
+
 
 frappe.ui.form.on("Patient Encounter", "symptoms_select", function(frm) {
 	if(frm.doc.symptoms_select){
@@ -578,3 +627,6 @@ erpnext.stock.select_batch_and_serial_no = (frm, item) => {
 	});
 
 }
+
+
+

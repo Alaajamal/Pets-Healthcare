@@ -382,6 +382,7 @@ def get_drugs_to_invoice(encounter):
 						'description': description})
 				return item_to_invoice
 
+
 @frappe.whitelist()
 def get_children(doctype, parent, company, is_root=False):
 	parent_fieldname = 'parent_' + doctype.lower().replace(' ', '_')
@@ -542,3 +543,6 @@ def render_doc_as_html(doctype, docname, exclude_fields = []):
 		doc_html = "<div class='small'><div class='col-md-12 text-right'><a class='btn btn-default btn-xs' href='#Form/%s/%s'></a></div>" %(doctype, docname) + doc_html + "</div>"
 
 	return {'html': doc_html}
+
+
+

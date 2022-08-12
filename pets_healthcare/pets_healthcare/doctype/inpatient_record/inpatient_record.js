@@ -13,7 +13,7 @@ frappe.ui.form.on('Inpatient Record', {
 			frm.add_custom_button(__('Discharge'), function() {
 				discharge_patient(frm);
 			} );
-			frm.set_df_property("btn_transfer", "hidden", 0);
+			frm.set_df_property("btn_transfer", "hidden", 1);
 		}
 		if(!frm.doc.__islocal && (frm.doc.status == "Discharged" || frm.doc.status == "Discharge Scheduled")){
 			frm.disable_save();
@@ -183,3 +183,5 @@ var transfer_patient_dialog = function(frm){
 		'leave_from': not_left_service_unit
 	});
 };
+
+

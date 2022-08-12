@@ -1,4 +1,5 @@
 {
+ "allow_copy": 1,
  "allow_import": 1,
  "autoname": "naming_series:",
  "beta": 1,
@@ -27,6 +28,8 @@
   "posting_date",
   "posting_time",
   "invoiced",
+  "vital_signs_section",
+  "patient_vital_signs",
   "sb_symptoms",
   "symptoms_select",
   "symptoms",
@@ -39,11 +42,19 @@
   "codification_table",
   "sb_drug_prescription",
   "drug_prescription",
+  "consumables_section",
   "items",
   "sb_test_prescription",
   "lab_test_prescription",
+  "sample_collection_section",
+  "sample",
   "sb_procedures",
   "procedure_prescription",
+  "vaccination_section",
+  "patient_vaccination",
+  "medical_record_section",
+  "medical_record",
+  "more_information_section",
   "encounter_comment",
   "amended_from"
  ],
@@ -110,15 +121,17 @@
   {
    "fieldname": "patient_age",
    "fieldtype": "Data",
-   "label": "Age",
-   "read_only": 1,
-   "report_hide": 1
+   "label": "Patient Age",
+   "read_only": 1
   },
   {
+   "fetch_from": "patient.sex",
    "fieldname": "patient_sex",
    "fieldtype": "Select",
    "label": "Gender",
+   "no_copy": 1,
    "options": "\nMale\nFemale\nOther",
+   "print_hide": 1,
    "read_only": 1,
    "report_hide": 1
   },
@@ -143,6 +156,7 @@
    "reqd": 1
   },
   {
+   "default": "\u0642\u0633\u0645 \u0627\u0644\u0631\u0639\u0627\u064a\u0629 \u0627\u0644\u0635\u062d\u064a\u0629",
    "fieldname": "visit_department",
    "fieldtype": "Link",
    "ignore_user_permissions": 1,
@@ -197,11 +211,10 @@
    "no_copy": 1
   },
   {
-   "default": "0",
+   "default": "1",
    "fieldname": "symptoms_in_print",
    "fieldtype": "Check",
    "label": "In print",
-   "no_copy": 1,
    "print_hide": 1,
    "report_hide": 1
   },
@@ -230,7 +243,6 @@
    "fieldname": "diagnosis_in_print",
    "fieldtype": "Check",
    "label": "In print",
-   "no_copy": 1,
    "print_hide": 1,
    "report_hide": 1
   },
@@ -238,15 +250,18 @@
    "collapsible": 1,
    "fieldname": "codification",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Medical Coding"
   },
   {
    "fieldname": "codification_table",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Medical Coding",
    "options": "Codification Table"
   },
   {
+   "collapsible": 1,
    "fieldname": "sb_drug_prescription",
    "fieldtype": "Section Break",
    "label": "Medication"
@@ -258,6 +273,7 @@
    "options": "Drug Prescription"
   },
   {
+   "collapsible": 1,
    "fieldname": "sb_test_prescription",
    "fieldtype": "Section Break",
    "label": "Investigations"
@@ -269,6 +285,7 @@
    "options": "Lab Prescription"
   },
   {
+   "collapsible": 1,
    "fieldname": "sb_procedures",
    "fieldtype": "Section Break",
    "label": "Procedures"
@@ -282,7 +299,7 @@
   },
   {
    "fieldname": "encounter_comment",
-   "fieldtype": "Small Text",
+   "fieldtype": "Text Editor",
    "ignore_xss_filter": 1,
    "label": "Review Details",
    "no_copy": 1
@@ -305,13 +322,13 @@
    "read_only": 1
   },
   {
-   "allow_on_submit": 1,
    "fieldname": "items",
    "fieldtype": "Table",
    "label": "Consumables",
    "options": "Patient Encounter Item"
   },
   {
+   "default": "Today",
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "label": "Posting Date"
@@ -320,10 +337,72 @@
    "fieldname": "posting_time",
    "fieldtype": "Time",
    "label": "Posting Time"
+  },
+  {
+   "bold": 1,
+   "collapsible": 1,
+   "fieldname": "vital_signs_section",
+   "fieldtype": "Section Break",
+   "label": "Vital Signs"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "consumables_section",
+   "fieldtype": "Section Break",
+   "label": "Consumables"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "medical_record_section",
+   "fieldtype": "Section Break",
+   "label": "Medical Record"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "medical_record",
+   "fieldtype": "Table",
+   "label": "Medical Record",
+   "options": "Medical Record"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "more_information_section",
+   "fieldtype": "Section Break",
+   "label": "More Information"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "sample_collection_section",
+   "fieldtype": "Section Break",
+   "label": "Sample Collection"
+  },
+  {
+   "fieldname": "sample",
+   "fieldtype": "Table",
+   "label": "Sample",
+   "options": "Sample"
+  },
+  {
+   "fieldname": "patient_vital_signs",
+   "fieldtype": "Table",
+   "label": "Patient Vital Signs",
+   "options": "Patient Vital Signs"
+  },
+  {
+   "fieldname": "patient_vaccination",
+   "fieldtype": "Table",
+   "label": "Patient Vaccination",
+   "options": "Patient Vaccination"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "vaccination_section",
+   "fieldtype": "Section Break",
+   "label": "Vaccination"
   }
  ],
  "is_submittable": 1,
- "modified": "2021-10-20 12:27:30.947296",
+ "modified": "2022-07-28 15:25:03.857719",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Patient Encounter",
@@ -334,6 +413,63 @@
    "cancel": 1,
    "create": 1,
    "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Healthcare  Practitioner",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Practitioner",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
    "email": 1,
    "export": 1,
    "print": 1,

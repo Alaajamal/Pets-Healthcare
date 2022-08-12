@@ -1,0 +1,29 @@
+{
+ "creation": "2022-06-19 12:03:24.531003",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "complaint"
+ ],
+ "fields": [
+  {
+   "fieldname": "complaint",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Complaint",
+   "options": "Complaint"
+  }
+ ],
+ "istable": 1,
+ "modified": "2022-06-19 12:03:24.531003",
+ "modified_by": "Administrator",
+ "module": "Pets Healthcare",
+ "name": "Patient Encounter Symptom",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

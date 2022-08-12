@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
 from frappe.utils import cstr
-from frappe.utils import cstr, cint, flt, comma_or, getdate, nowdate, formatdate, format_time
+from frappe.utils import cstr, cint, flt, comma_or, getdate, nowdate, formatdate, format_time, now_datetime
 from erpnext.stock.utils import get_incoming_rate
 from erpnext.stock.stock_ledger import get_previous_sle, NegativeStockError, get_valuation_rate
 from erpnext.stock.get_item_details import get_bin_details, get_default_cost_center, get_conversion_factor, get_reserved_qty_for_so
@@ -17,9 +17,14 @@ from erpnext.stock.doctype.item.item import get_item_defaults
 from erpnext.manufacturing.doctype.bom.bom import validate_bom_no, add_additional_cost
 from erpnext.stock.utils import get_bin
 from frappe.model.mapper import get_mapped_doc
+from frappe import _
+from frappe.utils.csvutils import getlink
+from frappe.utils import add_days, getdate, nowdate, nowtime
 from erpnext.stock.doctype.serial_no.serial_no import update_serial_nos_after_submit, get_serial_nos
 from erpnext.stock.doctype.stock_reconciliation.stock_reconciliation import OpeningEntryAccountError
 import json
+from frappe.utils import add_to_date, now
+
 
 from six import string_types, itervalues, iteritems
 
@@ -115,6 +120,10 @@ class PatientEncounter(StockController):
 		self.update_stock_ledger()
 		# ~ update_serial_nos_after_submit(self, "items")
 		self.make_gl_entries()
+		self.insert_signs_to_vital_sings_record()
+		self.insert_sample_collection()
+		self.insert_medical_record()
+		self.insert_clinic_procedure()
 
 	def update_stock_ledger(self):
 		sl_entries = []
@@ -143,7 +152,111 @@ class PatientEncounter(StockController):
 			sl_entries.reverse()
 
 		self.make_sl_entries(sl_entries, self.amended_from and 'Yes' or 'No')
+		
+		
+		# ~ create vital signs Document
+	def insert_signs_to_vital_sings_record(doc):
+		for d in doc.get("patient_vital_signs"):
+			if not d.reference_name1:
+				vital_signs = frappe.new_doc("Vital Signs") 
+				vital_signs.patient = doc.patient
+				vital_signs.signs_date = nowdate()
+				vital_signs.signs_time = nowtime()
+				vital_signs.temperature = d.temperature
+				vital_signs.pulse = d.pulse
+				vital_signs.respiratory_rate = d.respiratory_rate
+				vital_signs.tongue = d.tongue
+				vital_signs.abdomen = d.abdomen
+				vital_signs.reflexes = d.reflexes
+				vital_signs.bp_systolic = d.bp_systolic
+				vital_signs.bp_diastolic = d.bp_diastolic
+				vital_signs.bp_diastolic = d.bp_diastolic
+				vital_signs.bp = d.bp
+				vital_signs.height = d.height
+				vital_signs.weight = d.weight
+				vital_signs.save(ignore_permissions=True)
+				vital_signs.submit()
+				frappe.db.set_value(
+					"Patient Vital Signs",
+					d.name,
+					"reference_name1",
+					vital_signs.name,
+					update_modified=False,
+				)
+				frappe.msgprint(_("Vital Sign(s) {0} created.").format(getlink("Vital Signs", vital_signs.name)))
 			
+			
+		# ~ create Sample_collection document
+	def insert_sample_collection(doc):
+		for d in doc.get("sample"):
+			if not d.reference_name1:
+				sample = frappe.new_doc("Sample Collection")
+				sample.patient = doc.patient
+				sample.patient_age = doc.patient_age
+				sample.practitioner = doc.practitioner
+				sample.collected_time = now_datetime()
+				sample.sample = d.sample
+				sample.sample_uom = d.sample_uom
+				sample.sample_quantity = d.sample_quantity
+				sample.collected_by = d.collected_by
+				sample.save(ignore_permissions=True)
+				sample.submit()
+				frappe.db.set_value(
+					"Sample",
+					d.name,
+					"reference_name1",
+					sample.name,
+					update_modified=False,
+				)
+				frappe.msgprint(("Sample Collection {0} Created").format(getlink("Sample Collection", sample.name)))
+			
+		# Create Medical Record Document
+	def insert_medical_record(doc):
+		for d in doc.get("medical_record"):
+			if not d.reference_name:
+				record = frappe.new_doc("Patient Medical Record")
+				record.patient = doc.patient
+				record.pet_owner = doc.pet_owner
+				record.subject = d.subject
+				record.attach = d.attach_medical_record
+				record.reference_doctype = "Patient Encounter"
+				record.reference_name = doc.name
+				record.save(ignore_permissions=True)
+				frappe.db.set_value(
+					"Medical Record",
+					d.name,
+					"reference_name",
+					record.name,
+					update_modified=False,
+				)
+				frappe.msgprint(("Patient Medical Record {0} Created").format(getlink("Patient Medical Record", record.name)))
+
+		#Create Clinical Procedure Doument
+	def insert_clinic_procedure(doc):
+		for d in doc.get("procedure_prescription"):
+			if not d.reference_name:
+				procedure = frappe.new_doc("Clinical Procedure")
+				procedure.patient = doc.patient
+				procedure.patient_sex = doc.patient_sex
+				procedure.patient_age = doc.patient_age
+				procedure.medical_department = doc.visit_department
+				procedure.practitioner = d.practitioner
+				procedure.procedure_template= d.procedure
+				procedure.start_date = d.date
+				procedure.invoiced = 1
+				procedure.status = "Draft"
+				procedure.reference_name = doc.name
+				procedure.save(ignore_permissions=True)
+				frappe.db.set_value(
+					"Procedure Prescription",
+					d.name,
+					"reference_name",
+					procedure.name,
+					update_modified=False,
+				)
+				frappe.msgprint(("Clinical Procedure {0} Created").format(getlink("Clinical Procedure", procedure.name)))
+
+		
 def insert_encounter_to_medical_record(doc):
 	subject = set_subject_field(doc)
 	medical_record = frappe.new_doc("Patient Medical Record")
@@ -198,7 +311,8 @@ def get_lab_test_prescription(self, procdure_template= None ):
 			child.test = ltp_doc.test
 			child.comments = ltp_doc.comment
 	return data
-			
+	
+		
 
 @frappe.whitelist()
 def get_warehouse_details(args):
@@ -218,5 +332,7 @@ def get_warehouse_details(args):
 			"basic_rate" : get_incoming_rate(args)
 		}
 	return ret
+
+
 
 

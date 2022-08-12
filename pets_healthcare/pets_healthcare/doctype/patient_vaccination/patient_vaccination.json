@@ -1,24 +1,18 @@
 {
- "allow_copy": 1,
- "creation": "2021-08-15 16:11:42.530338",
+ "creation": "2022-07-28 15:16:29.256340",
  "doctype": "DocType",
+ "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "item",
   "uom",
+  "qty",
   "date",
   "state"
  ],
  "fields": [
   {
-   "fieldname": "item",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Item",
-   "options": "Item"
-  },
-  {
-   "fetch_from": "item.stock_uom",
+   "default": "Unit",
    "fieldname": "uom",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -26,25 +20,40 @@
    "options": "UOM"
   },
   {
+   "default": "Today",
    "fieldname": "date",
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Date"
   },
   {
-   "default": "Not Taken",
+   "default": "1",
+   "fieldname": "qty",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Qty"
+  },
+  {
+   "default": "Taken",
    "fieldname": "state",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "State",
    "options": "\nNot Taken\nTaken\nTaken Outside\nSkiped"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item",
+   "options": "Item"
   }
  ],
  "istable": 1,
- "modified": "2022-07-28 14:49:20.750050",
+ "modified": "2022-07-28 18:22:02.721224",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
- "name": "Pet Vaccine Schedule",
+ "name": "Patient Vaccination",
  "owner": "Administrator",
  "permissions": [],
  "quick_entry": 1,

@@ -35,6 +35,7 @@ frappe.ui.form.on('Patient', {
 				frappe.set_route("patient_history");
 			},"View");
 		}
+		
 		if (!frm.doc.__islocal && (frappe.user.has_role("Nursing User") || frappe.user.has_role("Physician"))) {
 			frm.add_custom_button(__('Vital Signs'), function () {
 				btn_create_vital_signs(frm);

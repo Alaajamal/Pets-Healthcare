@@ -13,7 +13,6 @@
  ],
  "fields": [
   {
-   "fetch_from": "patient.patient_name",
    "fieldname": "patient",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -54,7 +53,7 @@
    "options": "Pet Vaccine Schedule"
   }
  ],
- "modified": "2021-08-17 10:47:28.870949",
+ "modified": "2022-07-25 09:34:52.814670",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Pet Vaccination",

@@ -65,8 +65,9 @@ def schedule_inpatient(patient, encounter_id, practitioner):
 	inpatient_record.status = "Admission Scheduled"
 	inpatient_record.scheduled_date = today()
 	inpatient_record.admission_practitioner = practitioner
-	inpatient_record.admission_encounter = encounter_id
+	inpatient_record.admission_encounter = encounter_id	
 	inpatient_record.save(ignore_permissions = True)
+	
 
 @frappe.whitelist()
 def schedule_discharge(patient, encounter_id=None, practitioner=None):
@@ -91,35 +92,35 @@ def check_out_inpatient(inpatient_record):
 				frappe.db.set_value("Healthcare Service Unit", inpatient_occupancy.service_unit, "occupancy_status", "Vacant")
 
 def discharge_patient(inpatient_record):
-	validate_invoiced_inpatient(inpatient_record)
+	# ~ validate_invoiced_inpatient(inpatient_record)
 	inpatient_record.discharge_date = today()
 	inpatient_record.status = "Discharged"
 
 	inpatient_record.save(ignore_permissions = True)
 
-def validate_invoiced_inpatient(inpatient_record):
-	pending_invoices = []
-	if inpatient_record.inpatient_occupancies:
-		service_unit_names = False
-		for inpatient_occupancy in inpatient_record.inpatient_occupancies:
-			if inpatient_occupancy.invoiced != 1:
-				if service_unit_names:
-					service_unit_names += ", " + inpatient_occupancy.service_unit
-				else:
-					service_unit_names = inpatient_occupancy.service_unit
-		if service_unit_names:
-			pending_invoices.append("Inpatient Occupancy (" + service_unit_names + ")")
+# ~ def validate_invoiced_inpatient(inpatient_record):
+	# ~ pending_invoices = []
+	# ~ if inpatient_record.inpatient_occupancies:
+		# ~ service_unit_names = False
+		# ~ for inpatient_occupancy in inpatient_record.inpatient_occupancies:
+			# ~ if inpatient_occupancy.invoiced != 1:
+				# ~ if service_unit_names:
+					# ~ service_unit_names += ", " + inpatient_occupancy.service_unit
+				# ~ else:
+					# ~ service_unit_names = inpatient_occupancy.service_unit
+		# ~ if service_unit_names:
+			# ~ pending_invoices.append("Inpatient Occupancy (" + service_unit_names + ")")
 
-	docs = ["Patient Appointment", "Patient Encounter", "Lab Test", "Clinical Procedure"]
+	# ~ docs = ["Patient Appointment", "Patient Encounter", "Lab Test", "Clinical Procedure"]
 
-	for doc in docs:
-		doc_name_list = get_inpatient_docs_not_invoiced(doc, inpatient_record)
-		if doc_name_list:
-			pending_invoices = get_pending_doc(doc, doc_name_list, pending_invoices)
+	# ~ for doc in docs:
+		# ~ doc_name_list = get_inpatient_docs_not_invoiced(doc, inpatient_record)
+		# ~ if doc_name_list:
+			# ~ pending_invoices = get_pending_doc(doc, doc_name_list, pending_invoices)
 
-	if pending_invoices:
-		frappe.throw(_("Can not mark Inpatient Record Discharged, there are Unbilled Invoices {0}").format(", "
-			.join(pending_invoices)))
+	# ~ if pending_invoices:
+		# ~ frappe.throw(_("Can not mark Inpatient Record Discharged, there are Unbilled Invoices {0}").format(", "
+			# ~ .join(pending_invoices)))
 
 def get_pending_doc(doc, doc_name_list, pending_invoices):
 	if doc_name_list:

@@ -42,15 +42,13 @@
    "label": "Schedule Details"
   }
  ],
- "modified": "2021-06-17 12:09:55.094676",
+ "modified": "2022-07-26 08:50:04.800288",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Practitioner Schedule",
  "owner": "rmehta@gmail.com",
  "permissions": [
   {
-   "create": 1,
-   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,

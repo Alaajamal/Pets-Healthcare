@@ -1,0 +1,419 @@
+{
+ "creation": "2022-06-19 10:36:15.599571",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "patient_info_section",
+  "patient",
+  "full_name",
+  "dob",
+  "column_break_3",
+  "date",
+  "pet_owner",
+  "pet_type",
+  "appointment_details_section",
+  "appointment",
+  "appointment_datetime",
+  "column_break_11",
+  "type",
+  "healthcare_practitioner",
+  "vital_signs_section",
+  "temperature",
+  "pulse",
+  "respiratory_rate",
+  "tongue",
+  "column_break_20",
+  "abdomen",
+  "reflexes",
+  "bp_systolic",
+  "bp_diastolic",
+  "column_break_25",
+  "pd",
+  "height",
+  "weight",
+  "add_vital_signs",
+  "encounter_impression_section",
+  "complaints",
+  "column_break_33",
+  "diagnosis",
+  "add_symptoms",
+  "medications_section",
+  "drug_prescription",
+  "add_drug",
+  "sampel_collection_section",
+  "sample",
+  "sample_uom",
+  "column_break_41",
+  "sample_quantity",
+  "add_sample_collection",
+  "investigations_section",
+  "investigations",
+  "add_lab_test",
+  "procedures_section",
+  "procedures",
+  "add_procedures",
+  "vaccination_section",
+  "pet_vaccine_schedule",
+  "add_vaccination",
+  "inpatient_occupancy_section",
+  "inpatient_occupancy",
+  "more_details_section",
+  "more_details",
+  "add_details"
+ ],
+ "fields": [
+  {
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Patient ",
+   "options": "Patient",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "patient.patient_name",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Encounter Date"
+  },
+  {
+   "fetch_from": "patient.pet_owner",
+   "fieldname": "pet_owner",
+   "fieldtype": "Link",
+   "label": "Pet Owner",
+   "options": "Pet Owner",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "patient.dob",
+   "fetch_if_empty": 1,
+   "fieldname": "dob",
+   "fieldtype": "Data",
+   "label": "Age",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "appointment_details_section",
+   "fieldtype": "Section Break",
+   "label": "Appointment Details"
+  },
+  {
+   "fieldname": "appointment",
+   "fieldtype": "Link",
+   "label": "Appointment",
+   "options": "Patient Appointment",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "patient.pet_type",
+   "fieldname": "pet_type",
+   "fieldtype": "Link",
+   "label": "Pet Type",
+   "options": "Pet Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "appointment.appointment_type",
+   "fetch_if_empty": 1,
+   "fieldname": "type",
+   "fieldtype": "Link",
+   "label": "Appointment Type",
+   "options": "Appointment Type",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "appointment.practitioner",
+   "fieldname": "healthcare_practitioner",
+   "fieldtype": "Link",
+   "label": "Healthcare Practitioner",
+   "options": "Healthcare Practitioner",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "appointment.appointment_datetime",
+   "fieldname": "appointment_datetime",
+   "fieldtype": "Datetime",
+   "label": "Appointment Datetime",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "vital_signs_section",
+   "fieldtype": "Section Break",
+   "label": "Vital Signs"
+  },
+  {
+   "fieldname": "temperature",
+   "fieldtype": "Data",
+   "label": "Body Temperature"
+  },
+  {
+   "fieldname": "pulse",
+   "fieldtype": "Data",
+   "label": "Heart Rate / Pulse"
+  },
+  {
+   "fieldname": "respiratory_rate",
+   "fieldtype": "Data",
+   "label": "Respiratory rate"
+  },
+  {
+   "fieldname": "tongue",
+   "fieldtype": "Select",
+   "label": "Tongue",
+   "options": "\nCoated\nVery Coated\nNormal\nFurry\nCuts"
+  },
+  {
+   "fieldname": "abdomen",
+   "fieldtype": "Select",
+   "label": "Abdomen",
+   "options": "\nNormal\nBloated\nFull\nFluid\nConstipated"
+  },
+  {
+   "fieldname": "column_break_20",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reflexes",
+   "fieldtype": "Select",
+   "label": "Reflexes",
+   "options": "\nNormal\nHyper\nVery Hyper\nOne Sided"
+  },
+  {
+   "fieldname": "bp_systolic",
+   "fieldtype": "Data",
+   "label": "Blood Pressure (systolic)"
+  },
+  {
+   "fieldname": "bp_diastolic",
+   "fieldtype": "Data",
+   "label": "Blood Pressure (diastolic)"
+  },
+  {
+   "fieldname": "pd",
+   "fieldtype": "Data",
+   "label": "Blood Pressure"
+  },
+  {
+   "fieldname": "column_break_25",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "height",
+   "fieldtype": "Float",
+   "label": "Height (In Meter)"
+  },
+  {
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "label": "Weight (In Kilogram)"
+  },
+  {
+   "fieldname": "add_vital_signs",
+   "fieldtype": "Button",
+   "label": "Add Vital Signs"
+  },
+  {
+   "bold": 1,
+   "fieldname": "patient_info_section",
+   "fieldtype": "Section Break",
+   "label": "Patient Info"
+  },
+  {
+   "bold": 1,
+   "fieldname": "encounter_impression_section",
+   "fieldtype": "Section Break",
+   "label": "Encounter Impression"
+  },
+  {
+   "fieldname": "complaints",
+   "fieldtype": "Table MultiSelect",
+   "label": "Complaints",
+   "options": "Patient Encounter Symptom"
+  },
+  {
+   "fieldname": "column_break_33",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "diagnosis",
+   "fieldtype": "Table MultiSelect",
+   "label": "Diagnosis",
+   "options": "Patient Encounter Diagnosis"
+  },
+  {
+   "fieldname": "add_symptoms",
+   "fieldtype": "Button",
+   "label": "Add Symptoms"
+  },
+  {
+   "bold": 1,
+   "fieldname": "medications_section",
+   "fieldtype": "Section Break",
+   "label": "Medications"
+  },
+  {
+   "fieldname": "drug_prescription",
+   "fieldtype": "Table",
+   "label": "Drug Prescription",
+   "options": "Drug Prescription"
+  },
+  {
+   "fieldname": "add_drug",
+   "fieldtype": "Button",
+   "label": "Add Drug"
+  },
+  {
+   "bold": 1,
+   "fieldname": "investigations_section",
+   "fieldtype": "Section Break",
+   "label": "Investigations"
+  },
+  {
+   "fieldname": "investigations",
+   "fieldtype": "Table",
+   "label": "Investigations",
+   "options": "Lab Prescription"
+  },
+  {
+   "fieldname": "add_lab_test",
+   "fieldtype": "Button",
+   "label": "Add Lab Test"
+  },
+  {
+   "bold": 1,
+   "fieldname": "procedures_section",
+   "fieldtype": "Section Break",
+   "label": "Procedures"
+  },
+  {
+   "fieldname": "procedures",
+   "fieldtype": "Table",
+   "label": "Procedures",
+   "options": "Procedure Prescription"
+  },
+  {
+   "fieldname": "add_procedures",
+   "fieldtype": "Button",
+   "label": "Add Procedures"
+  },
+  {
+   "bold": 1,
+   "fieldname": "vaccination_section",
+   "fieldtype": "Section Break",
+   "label": "Vaccination"
+  },
+  {
+   "fieldname": "pet_vaccine_schedule",
+   "fieldtype": "Table",
+   "label": "Pet Vaccine Schedule",
+   "options": "Pet Vaccine Schedule"
+  },
+  {
+   "fieldname": "add_vaccination",
+   "fieldtype": "Button",
+   "label": "Add Vaccination"
+  },
+  {
+   "bold": 1,
+   "fieldname": "sampel_collection_section",
+   "fieldtype": "Section Break",
+   "label": "Sampel Collection"
+  },
+  {
+   "fieldname": "sample",
+   "fieldtype": "Link",
+   "label": "Sample",
+   "options": "Lab Test Sample"
+  },
+  {
+   "fetch_from": "sample.sample_uom",
+   "fetch_if_empty": 1,
+   "fieldname": "sample_uom",
+   "fieldtype": "Data",
+   "label": "UOM",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_41",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sample_quantity",
+   "fieldtype": "Float",
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "add_sample_collection",
+   "fieldtype": "Button",
+   "label": "Add Sample Collection"
+  },
+  {
+   "bold": 1,
+   "fieldname": "more_details_section",
+   "fieldtype": "Section Break",
+   "label": "More Details"
+  },
+  {
+   "fieldname": "more_details",
+   "fieldtype": "Text Editor",
+   "label": "More Details"
+  },
+  {
+   "fieldname": "add_details",
+   "fieldtype": "Button",
+   "label": "Add Details"
+  },
+  {
+   "fieldname": "inpatient_occupancy",
+   "fieldtype": "Table",
+   "label": "Inpatient Occupancy",
+   "options": "Inpatient Occupancy"
+  },
+  {
+   "fieldname": "inpatient_occupancy_section",
+   "fieldtype": "Section Break",
+   "label": "Inpatient Occupancy"
+  }
+ ],
+ "hide_toolbar": 1,
+ "issingle": 1,
+ "modified": "2022-06-30 12:46:25.163580",
+ "modified_by": "Administrator",
+ "module": "Pets Healthcare",
+ "name": "Pets Healthcare",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

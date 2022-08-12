@@ -52,7 +52,6 @@
   {
    "fieldname": "appointment",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Appointment",
    "options": "Patient Appointment",
    "set_only_once": 1
@@ -222,7 +221,7 @@
    "options": "Draft\nIn Progress\nCompleted\nPending\nCancelled"
   }
  ],
- "modified": "2021-12-09 10:47:08.952505",
+ "modified": "2022-07-26 13:54:57.444539",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Clinical Procedure",

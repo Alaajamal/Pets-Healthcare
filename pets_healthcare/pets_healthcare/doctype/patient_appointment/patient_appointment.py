@@ -25,6 +25,7 @@ class PatientAppointment(Document):
 		elif appointment_date > today:
 			frappe.db.set_value("Patient Appointment", self.name, "status", "Scheduled")
 		self.reload()
+		
 
 	def validate(self):
 		self.set_appointment_datetime()
@@ -46,7 +47,8 @@ class PatientAppointment(Document):
 		if overlaps:
 			frappe.throw(_("""Appointment overlaps with {0}.<br> {1} has appointment scheduled
 			with {2} at {3} having {4} minute(s) duration.""").format(overlaps[0][0], overlaps[0][1], overlaps[0][2], overlaps[0][3], overlaps[0][4]))
-
+	
+			
 	def set_appointment_datetime(self):
 		self.appointment_datetime = "%s %s" % (self.appointment_date, self.appointment_time or "00:00:00")
 
@@ -60,7 +62,7 @@ class PatientAppointment(Document):
 		# Check fee validity exists
 		appointment = self
 		validity_exist = validity_exists(appointment.practitioner, appointment.patient)
-		if validity_exist:
+		if validity_exist and self.appointment_type != "تطعيم":
 			fee_validity = frappe.get_doc("Fee Validity", validity_exist[0][0])
 
 			# Check if the validity is valid
@@ -70,13 +72,16 @@ class PatientAppointment(Document):
 				frappe.db.set_value("Fee Validity", fee_validity.name, "visited", visited)
 				if fee_validity.ref_invoice:
 					frappe.db.set_value("Patient Appointment", appointment.name, "invoiced", True)
-				frappe.msgprint(_("{0} has fee validity till {1}").format(appointment.patient, fee_validity.valid_till))
+				frappe.msgprint(_("{0} has fee validity till {1}").format(appointment.patient, fee_validity.valid_till))	
 		confirm_sms(self)
 
 		if frappe.db.get_value("Pets Healthcare Settings", None, "manage_appointment_invoice_automatically") == '1' and \
 			frappe.db.get_value("Patient Appointment", self.name, "invoiced") != 1:
 			invoice_appointment(self)
-
+			
+	
+	
+	
 @frappe.whitelist()
 def invoice_appointment(appointment_doc):
 	if not appointment_doc.name:
