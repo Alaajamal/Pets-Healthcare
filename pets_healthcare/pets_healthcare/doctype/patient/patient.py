@@ -53,6 +53,8 @@ class Patient(Document):
 			return "{0} - {1}".format(name, cstr(count))
 
 		return name
+		
+
 
 	def get_age(self):
 		age_str = ""

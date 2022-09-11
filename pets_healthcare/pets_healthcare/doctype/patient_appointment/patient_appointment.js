@@ -391,7 +391,7 @@ var btn_create_procedure = function(frm){
 var btn_create_encounter = function(frm){
 	var doc = frm.doc;
 	frappe.call({
-		method:"erpnext.healthcare.doctype.patient_appointment.patient_appointment.create_encounter",
+		method:"pets_healthcare.pets_healthcare.doctype.patient_appointment.patient_appointment.create_encounter",
 		args: {appointment: doc.name},
 		callback: function(data){
 			if(!data.exc){

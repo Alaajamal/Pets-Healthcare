@@ -241,11 +241,13 @@ var show_patient_info = function(pet_owner, me){
 			if(data.image){
 				details += "<div><img class='thumbnail' width=75% src='"+data.image+"'></div>";
 			}
-			details += "<b>" + data.patient_name +"</b><br>" + data.sex;
-			if(data.email) details += "<br>" + data.email;
-			if(data.mobile) details += "<br>" + data.mobile;
-			if(data.occupation) details += "<br><br><b>Occupation :</b> " + data.occupation;
+			details += "<br><b>Patient Name :</b>" + data.patient_name;
+			if(data.pet_type) details += "<br><b>Pet Type : </b> " + data.pet_type;
+			if(data.sex) details += "<br><b>Gender :</b>" + data.sex;
 			if(data.blood_group) details += "<br><b>Blood group : </b> " + data.blood_group;
+			if(data.dob) details += "<br><b>Date of birth  : </b> " + data.dob;
+			if(data.mobile) details += "<br><b>Mobile :</b> " + data.mobile;
+			if(data.occupation) details += "<br><br><b>Occupation :</b> " + data.occupation;
 			if(data.allergies) details +=  "<br><br><b>Allergies : </b> "+  data.allergies.replace("\n", "<br>");
 			if(data.medication) details +=  "<br><b>Medication : </b> "+  data.medication.replace("\n", "<br>");
 			if(data.alcohol_current_use) details +=  "<br><br><b>Alcohol use : </b> "+  data.alcohol_current_use;

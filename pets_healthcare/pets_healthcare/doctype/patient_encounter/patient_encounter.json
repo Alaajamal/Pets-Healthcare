@@ -1,5 +1,4 @@
 {
- "allow_copy": 1,
  "allow_import": 1,
  "autoname": "naming_series:",
  "beta": 1,
@@ -291,6 +290,7 @@
    "label": "Procedures"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "procedure_prescription",
    "fieldtype": "Table",
    "label": "Procedures",
@@ -298,6 +298,7 @@
    "options": "Procedure Prescription"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "encounter_comment",
    "fieldtype": "Text Editor",
    "ignore_xss_filter": 1,
@@ -402,7 +403,7 @@
   }
  ],
  "is_submittable": 1,
- "modified": "2022-07-28 15:25:03.857719",
+ "modified": "2022-08-30 21:30:00.501975",
  "modified_by": "Administrator",
  "module": "Pets Healthcare",
  "name": "Patient Encounter",

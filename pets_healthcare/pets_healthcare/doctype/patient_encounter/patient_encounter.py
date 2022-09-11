@@ -43,6 +43,7 @@ class PatientEncounter(StockController):
 	def after_insert(self):
 		insert_encounter_to_medical_record(self)
 
+
 	def on_cancel(self):
 		if(self.appointment):
 			frappe.db.set_value("Patient Appointment", self.appointment, "status", "Open")
@@ -124,6 +125,7 @@ class PatientEncounter(StockController):
 		self.insert_sample_collection()
 		self.insert_medical_record()
 		self.insert_clinic_procedure()
+		
 
 	def update_stock_ledger(self):
 		sl_entries = []
@@ -153,7 +155,7 @@ class PatientEncounter(StockController):
 
 		self.make_sl_entries(sl_entries, self.amended_from and 'Yes' or 'No')
 		
-		
+
 		# ~ create vital signs Document
 	def insert_signs_to_vital_sings_record(doc):
 		for d in doc.get("patient_vital_signs"):
@@ -255,6 +257,7 @@ class PatientEncounter(StockController):
 					update_modified=False,
 				)
 				frappe.msgprint(("Clinical Procedure {0} Created").format(getlink("Clinical Procedure", procedure.name)))
+				
 
 		
 def insert_encounter_to_medical_record(doc):
@@ -274,8 +277,12 @@ def update_encounter_to_medical_record(encounter):
 	if medical_record_id and medical_record_id[0][0]:
 		subject = set_subject_field(encounter)
 		frappe.db.set_value("Patient Medical Record", medical_record_id[0][0], "subject", subject)
+
 	else:
 		insert_encounter_to_medical_record(encounter)
+		
+
+
 
 def delete_medical_record(encounter):
 	frappe.db.sql("""delete from `tabPatient Medical Record` where reference_name = %s""", (encounter.name))
@@ -296,8 +303,14 @@ def set_subject_field(encounter):
 		subject += "\nTest(s) Prescribed."
 	if(encounter.procedure_prescription):
 		subject += "\nProcedure(s) Prescribed."
+	if(encounter.encounter_comment):
+		subject += "\nEncounter(s) Comment."
+	if (encounter.medical_record):
+		subject += "\nMedical Record."
 
 	return subject
+	
+
 
 def get_lab_test_prescription(self, procdure_template= None ):
 	data = []

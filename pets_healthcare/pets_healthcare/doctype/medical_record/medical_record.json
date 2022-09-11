@@ -1,0 +1,46 @@
+{
+ "creation": "2022-07-13 10:00:19.620397",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "subject",
+  "attach_medical_record",
+  "reference_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Subject"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "attach_medical_record",
+   "fieldtype": "Attach",
+   "ignore_user_permissions": 1,
+   "in_list_view": 1,
+   "label": "Attach Medical Record"
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Reference Name",
+   "options": "Patient Medical Record",
+   "read_only": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2022-08-31 08:49:14.543746",
+ "modified_by": "Administrator",
+ "module": "Pets Healthcare",
+ "name": "Medical Record",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

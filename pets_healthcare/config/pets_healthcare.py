@@ -212,5 +212,18 @@ def get_data():
 					"label": _("Healthcare Service Unit Type")
 				}
 			]
-		}
+		},
+		{
+			"label": _("Closing Voucher Clinic"),
+			"icon": "icon-list",
+			"items": [
+				{
+					"type": "doctype",
+					"name": "Clinic Closing Voucher",
+					"label": _("Clinic Closing Voucher"),
+					"onboard": 1,
+				}
+				
+			]
+		},
 	]

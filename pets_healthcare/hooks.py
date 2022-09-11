@@ -79,13 +79,13 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
+#doc_events = {
+	#"Patient Encounter": {
+		#"on_update": "",
 # 		"on_cancel": "method",
 # 		"on_trash": "method"
-#	}
-# }
+	#}
+#}
 
 # Scheduled Tasks
 # ---------------

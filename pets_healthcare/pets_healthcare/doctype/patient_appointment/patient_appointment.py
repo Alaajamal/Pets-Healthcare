@@ -324,6 +324,7 @@ def create_encounter(appointment):
 	encounter.practitioner = appointment.practitioner
 	encounter.visit_department = appointment.department
 	encounter.patient_sex = appointment.patient_sex
+	encounter.patient_age = appointment.patient_age
 	encounter.encounter_date = appointment.appointment_date
 	if appointment.invoiced:
 		encounter.invoiced = True

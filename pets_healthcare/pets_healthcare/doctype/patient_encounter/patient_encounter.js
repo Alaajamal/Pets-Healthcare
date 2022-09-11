@@ -353,26 +353,6 @@ frappe.ui.form.on("Patient Encounter", "practitioner", function(frm) {
 });
 
 
-//vaccine
-//~ frappe.ui.form.on('Patient Encounter', {
-	//~ refresh: function(frm) {
-
-	//~ },
-	//~ vaccine_template: function(frm) {
-		//~ console.log(frm.doc.vaccine_template);
-		//~ frappe.call({
-            //~ method: "get_vac_items", 
-            //~ doc:frm.doc,
-            //~ args:{"vac_template":frm.doc.vaccine_template},
-            //~ callback: function(r) {
-				//~ console.log(r)
-                //~ cur_frm.refresh()
-            //~ }
-        //~ });
-	//~ }
-//~ });
-
-
 
 frappe.ui.form.on("Patient Encounter", "symptoms_select", function(frm) {
 	if(frm.doc.symptoms_select){
@@ -472,6 +452,14 @@ frappe.ui.form.on("Procedure Prescription", {
 	}
 });
 
+//Reload Document after submit
+
+frappe.ui.form.on("Patient Encounter", "on_submit", function(frm) {
+	console.log("test");
+	setTimeout(() => {
+		window.location.reload();
+	}, 2000);
+});
 
 var calculate_age = function(birth) {
 	var ageMS = Date.parse(Date()) - Date.parse(birth);

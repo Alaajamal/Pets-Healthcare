@@ -2,7 +2,12 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Pet Owner', {
-	// refresh: function(frm) {
+	onload: function(frm) {
+		frm.set_query('customer', function(doc) {
+			return {
+				query: "erpnext.controllers.queries.customer_query"
+			};
+		});
 
-	// }
+	}
 });
